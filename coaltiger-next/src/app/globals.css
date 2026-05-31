@@ -41,6 +41,9 @@ html {
   background: var(--coal-900);
   -webkit-font-smoothing: antialiased;
   text-rendering: optimizeLegibility;
+  /* lock the page horizontally so a stray-wide element can never be panned to */
+  overflow-x: hidden;
+  width: 100%;
 }
 .lenis.lenis-smooth { scroll-behavior: auto !important; }
 .lenis.lenis-stopped { overflow: hidden; }
@@ -49,7 +52,14 @@ body {
   font-family: var(--font-body), system-ui, sans-serif;
   background: var(--coal-900);
   color: var(--text);
+  /* hard horizontal lock: hidden overflow + no horizontal overscroll bounce, */
+  /* and only allow vertical touch panning so swipes never drag the page sideways */
   overflow-x: hidden;
+  width: 100%;
+  max-width: 100%;
+  position: relative;
+  overscroll-behavior-x: none;
+  touch-action: pan-y pinch-zoom;
   line-height: 1.55;
   font-size: 16px;
 }
@@ -317,6 +327,8 @@ h1, h2, h3, h4 { font-family: var(--font-display), sans-serif; font-weight: 700;
 
 /* ---- Founder ---- */
 .founder { display: grid; grid-template-columns: 0.9fr 1.1fr; gap: 56px; align-items: center; }
+/* partnerships variant: wider text column on desktop (collapses to 1 col below 1024px) */
+.founder-partners { grid-template-columns: 1.1fr 0.9fr; }
 .founder-visual { position: relative; border-radius: 24px; overflow: hidden; border: 1px solid var(--line); aspect-ratio: 4/5; background: linear-gradient(160deg, var(--surface-2), var(--coal-900)); }
 .founder-photo { position: absolute; inset: 0; background-image: url("/img/leon-browne.jpg"); background-size: cover; background-position: center 28%; filter: contrast(105%) saturate(104%); }
 .founder-photo-scrim { position: absolute; inset: 0; pointer-events: none;
@@ -375,19 +387,19 @@ h1, h2, h3, h4 { font-family: var(--font-display), sans-serif; font-weight: 700;
 /* ===================== CHAT WIDGET ===================== */
 .chat-launch {
   position: fixed; bottom: 22px; right: 22px; z-index: 300;
-  width: 62px; height: 62px; border-radius: 50%; border: 1px solid rgba(34,224,230,.5);
+  width: 72px; height: 72px; border-radius: 50%; border: 1px solid rgba(34,224,230,.5);
   background: linear-gradient(135deg, var(--cyan), var(--emerald)); color: #02110f;
   display: flex; align-items: center; justify-content: center;
   box-shadow: 0 14px 40px -10px rgba(34,224,230,.6); transition: transform .35s var(--ease-spring), box-shadow .35s;
 }
 .chat-launch:hover { transform: translateY(-3px) scale(1.04); box-shadow: 0 20px 54px -10px rgba(34,224,230,.8); }
-.chat-launch svg { width: 27px; height: 27px; }
+.chat-launch svg { width: 32px; height: 32px; }
 .chat-launch .ping { position: absolute; inset: 0; border-radius: 50%; border: 1px solid var(--cyan); animation: chatping 2.6s var(--ease-out) infinite; }
 @keyframes chatping { 0% { transform: scale(1); opacity: .6; } 100% { transform: scale(1.5); opacity: 0; } }
 
 .chat-panel {
   position: fixed; bottom: 22px; right: 22px; z-index: 301;
-  width: min(400px, calc(100vw - 32px)); height: min(620px, calc(100dvh - 44px));
+  width: min(452px, calc(100vw - 32px)); height: min(712px, calc(100dvh - 44px));
   display: flex; flex-direction: column; overflow: hidden;
   border-radius: 22px; border: 1px solid var(--line-strong);
   background: rgba(8, 12, 19, 0.92); backdrop-filter: blur(22px) saturate(140%);
@@ -461,10 +473,12 @@ h1, h2, h3, h4 { font-family: var(--font-display), sans-serif; font-weight: 700;
 .chat-input button svg { width: 18px; height: 18px; }
 
 @media (max-width: 600px) {
-  .chat-panel { width: calc(100vw - 20px); height: calc(100dvh - 24px); right: 10px; bottom: 12px; border-radius: 18px; }
-  .chat-launch { bottom: 16px; right: 16px; width: 56px; height: 56px; }
-  .chat-head { padding: 13px 12px 13px 14px; }
-  .msg { max-width: 86%; }
+  .chat-panel { width: calc(100vw - 16px); height: calc(100dvh - 16px); right: 8px; bottom: 8px; border-radius: 18px; }
+  .chat-launch { bottom: 16px; right: 16px; width: 64px; height: 64px; }
+  .chat-launch svg { width: 29px; height: 29px; }
+  .chat-head { padding: 14px 13px 14px 16px; }
+  .msg { max-width: 88%; font-size: 15px; }
+  .chat-input input { height: 48px; font-size: 15px; }
 }
 
 /* ===================== RESPONSIVE ===================== */

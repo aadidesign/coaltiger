@@ -274,7 +274,7 @@ export default function Home() {
         <section className="block" id="partners" style={{ background: "var(--coal-850)", borderTop: "1px solid var(--line)", borderBottom: "1px solid var(--line)" }}>
           <span className="section-num">06 · Partnerships</span>
           <div className="wrap">
-            <div className="founder" style={{ gridTemplateColumns: "1.1fr 0.9fr" }}>
+            <div className="founder founder-partners">
               <Reveal>
                 <span className="eyebrow">Strategic Funding Partnerships</span>
                 <h2 style={{ fontSize: "clamp(2rem,4vw,3.4rem)", textTransform: "uppercase", margin: "18px 0 22px" }}>
