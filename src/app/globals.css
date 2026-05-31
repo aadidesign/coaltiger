@@ -387,7 +387,7 @@ h1, h2, h3, h4 { font-family: var(--font-display), sans-serif; font-weight: 700;
 
 .chat-panel {
   position: fixed; bottom: 22px; right: 22px; z-index: 301;
-  width: min(400px, calc(100vw - 32px)); height: min(620px, calc(100vh - 44px));
+  width: min(400px, calc(100vw - 32px)); height: min(620px, calc(100dvh - 44px));
   display: flex; flex-direction: column; overflow: hidden;
   border-radius: 22px; border: 1px solid var(--line-strong);
   background: rgba(8, 12, 19, 0.92); backdrop-filter: blur(22px) saturate(140%);
@@ -460,7 +460,7 @@ h1, h2, h3, h4 { font-family: var(--font-display), sans-serif; font-weight: 700;
 .chat-input button:not(:disabled):hover { transform: scale(1.06); box-shadow: 0 8px 20px -6px rgba(34,224,230,.7); }
 .chat-input button svg { width: 18px; height: 18px; }
 
-@media (max-width: 520px) {
+@media (max-width: 600px) {
   .chat-panel { width: calc(100vw - 20px); height: calc(100dvh - 24px); right: 10px; bottom: 12px; border-radius: 18px; }
   .chat-launch { bottom: 16px; right: 16px; width: 56px; height: 56px; }
   .chat-head { padding: 13px 12px 13px 14px; }
@@ -497,6 +497,12 @@ h1, h2, h3, h4 { font-family: var(--font-display), sans-serif; font-weight: 700;
   .chain-arrow { display: none; }
   .chain-node { flex-basis: 100%; }
   .founder { gap: 30px; }
+  /* the exploded node cluster has nowrap labels that overflow narrow screens — */
+  /* drop the decorative diagram on phones; the labelled list carries the content */
+  .arch-stage { display: none; }
+  .arch-list { grid-template-columns: 1fr; }
+  /* immune stages: single column so the text isn't cramped on small phones */
+  .immune { grid-template-columns: 1fr; gap: 24px; }
 }
 /* Short viewports (laptops, landscape) — keep the hero within one screen */
 @media (min-width: 1025px) and (max-height: 940px) {
@@ -515,7 +521,10 @@ h1, h2, h3, h4 { font-family: var(--font-display), sans-serif; font-weight: 700;
 @media (max-width: 760px) {
   .hero { min-height: 100svh; padding-top: 90px; }
   .hero-grid { gap: 18px; }
-  .hero h1 { font-size: clamp(2rem, 11vw, 3.1rem); }
+  /* smaller, wrappable heading so long words (e.g. "BETTERMENT") never clip off-screen */
+  .hero h1 { font-size: clamp(1.85rem, 9vw, 2.7rem); overflow-wrap: break-word; }
+  /* let the eyebrow tagline wrap instead of overflowing the right edge */
+  .hero-tag { flex-wrap: wrap; font-size: 10px; letter-spacing: .16em; line-height: 1.5; }
   .hero-sub { font-size: .95rem; margin: 14px 0 6px; }
   .hero-cta { margin-top: 16px; }
   .hero-cta .btn { height: 46px; flex: 1; min-width: 0; }
