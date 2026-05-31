@@ -522,12 +522,13 @@ h1, h2, h3, h4 { font-family: var(--font-display), sans-serif; font-weight: 700;
   .hero { min-height: 100svh; padding-top: 90px; }
   .hero-grid { gap: 18px; }
   /* smaller, wrappable heading so long words (e.g. "BETTERMENT") never clip off-screen */
-  .hero h1 { font-size: clamp(1.85rem, 9vw, 2.7rem); overflow-wrap: break-word; }
+  .hero h1 { font-size: clamp(1.55rem, 7.4vw, 2.4rem); overflow-wrap: break-word; }
   /* let the eyebrow tagline wrap instead of overflowing the right edge */
   .hero-tag { flex-wrap: wrap; font-size: 10px; letter-spacing: .16em; line-height: 1.5; }
   .hero-sub { font-size: .95rem; margin: 14px 0 6px; }
-  .hero-cta { margin-top: 16px; }
-  .hero-cta .btn { height: 46px; flex: 1; min-width: 0; }
+  /* stack CTAs full-width so long labels ("Funding Partnerships") don't clip */
+  .hero-cta { margin-top: 16px; flex-direction: column; }
+  .hero-cta .btn { height: 46px; width: 100%; }
   /* keep the image on phones (crispest at this width); hide the secondary ethos chips */
   .hero-visual { gap: 0; }
   .hero-visual .hero-principle { display: none; }

@@ -1,0 +1,17 @@
+services:
+  - type: web
+    name: coal-tiger-chatbot
+    runtime: node
+    plan: free
+    region: oregon
+    buildCommand: npm install
+    startCommand: npm start
+    healthCheckPath: /
+    autoDeploy: true
+    envVars:
+      - key: GEMINI_API_KEY
+        sync: false            # set the real key in the Render dashboard (never commit it)
+      - key: GEMINI_MODEL
+        value: gemini-2.0-flash
+      - key: ALLOWED_ORIGINS
+        sync: false            # e.g. https://your-site.vercel.app,https://www.coaltigerltd.com
